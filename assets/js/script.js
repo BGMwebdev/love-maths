@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     for (let button of buttons) {
         button.addEventListener("click", function() {
-            if (this.getAttribute("data-type") === "submit")   {
+            if (this.getAttribute("data-type") === "submit") {
                 checkAnswer();
             } else {
                 let gameType = this.getAttribute("data-type");
@@ -14,6 +14,13 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
     }
+
+    document.getElementById("answer-box").addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            checkAnswer();
+        }
+    });
+
     runGame("addition");
 
 })
@@ -23,6 +30,10 @@ document.addEventListener("DOMContentLoaded", function() {
  * and after the users answer has been processed
  */
 function runGame(gameType) { 
+
+    // makes sure the answer box is empty with every new game
+    document.getElementById("answer-box").value = "";
+    document.getElementById("answer-box").focus();
 
     // creates two random numbers between 1 and 25
     let num1 = Math.floor(Math.random() * 25) + 1;
