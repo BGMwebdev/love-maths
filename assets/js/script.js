@@ -1,12 +1,12 @@
 // wait for the DOM to finish loading before running the game
 // get the button elements and add eventListeners to them
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function() {
     let buttons = document.getElementsByTagName("button")
 
-    for (button of buttons){
-        button.addEventListener("click", function(){
-            if (this.getAttribute("data-type") === "submit"){
+    for (let button of buttons) {
+        button.addEventListener("click", function() {
+            if (this.getAttribute("data-type") === "submit")   {
                 checkAnswer();
             } else {
                 let gameType = this.getAttribute("data-type");
@@ -22,15 +22,16 @@ document.addEventListener("DOMContentLoaded", function(){
  * the main game 'loop', called when the script is first loaded
  * and after the users answer has been processed
  */
-function runGame(gameType){
-    // creates two random numbers between 1 and 25
-    let num1 = Math.floor(Math.random()*25)+1;
-    let num2 = Math.floor(Math.random()*25)+1;
+function runGame(gameType) { 
 
-    if (gameType === "addition"){
+    // creates two random numbers between 1 and 25
+    let num1 = Math.floor(Math.random() * 25) + 1;
+    let num2 = Math.floor(Math.random() * 25) + 1;
+
+    if (gameType === "addition") {
         displayAdditionQuestion(num1, num2);
     } else {
-        alert(`Unknown game type: ${gameType}`)
+        alert(`Unknown game type: ${gameType}`); 
         throw `Unknown game type: ${gameType}. Aborting!`;
     }
 
@@ -41,8 +42,8 @@ function runGame(gameType){
  * returned calculateCorrectAnswer array.
  */
 function checkAnswer(){
-    
-    let userAnswer = parseInt(getElementById('answer-box').value);
+    // '.value' is needed, because it's an input element. 'innerText' doesn't work.
+    let userAnswer = parseInt(document.getElementById('answer-box').value);
     let calculatedAnswer = calculateCorrectAnswer();
     let isCorrect = userAnswer === calculatedAnswer[0];
 
